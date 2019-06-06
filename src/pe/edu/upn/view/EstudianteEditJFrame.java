@@ -1,25 +1,16 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package pe.edu.upn.view;
 
 import java.util.List;
-import pe.edu.upn.entity.Carrera;
 import pe.edu.upn.entity.Estudiante;
-import pe.edu.upn.entity.Facultad;
-import pe.edu.upn.entity.Genero;
 
-/**
- *
- * @author USUARIO
- */
-public class EstudianteNewJFrame extends javax.swing.JFrame {
+public class EstudianteEditJFrame extends javax.swing.JFrame {
 
     private List<Estudiante> estudiantes;
     private EstudianteJFrame frmLista;
-    public EstudianteNewJFrame() {
+    private Integer id;
+    private Estudiante estudiante;
+    
+    public EstudianteEditJFrame() {
         initComponents();
     }
 
@@ -29,6 +20,22 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
 
     public void setFrmLista(EstudianteJFrame frmLista) {
         this.frmLista = frmLista;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+        int tamano = this.estudiantes.size();
+        for(int i=0; i<tamano; i++) {
+            Estudiante estu = estudiantes.get(i);
+            if(estu.getId().equals(id)) {
+                txtCodigo.setText(estu.getCodigo());
+                txtDni.setText(estu.getDni());
+                txtApellidos.setText(estu.getApellidos());
+                txtNombres.setText(estu.getNombres());
+                this.estudiante = estu;
+                break;
+            }
+        }
     }
     
     
@@ -42,7 +49,6 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -53,15 +59,15 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
         txtNombres = new javax.swing.JTextField();
         btnGuardar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
-        jLabel1.setText("Nuevo Estudiante");
+        jLabel1 = new javax.swing.JLabel();
 
         jLabel2.setText("Codigo:");
 
         jLabel3.setText("DNI:");
 
         jLabel4.setText("Apellidos:");
+
+        txtApellidos.setEnabled(false);
 
         jLabel5.setText("Nombres:");
 
@@ -79,12 +85,15 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Editar Estudiante");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
@@ -110,7 +119,7 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
                                         .addComponent(txtNombres, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addComponent(jLabel2))))
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -137,25 +146,23 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnCancelar))
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        Facultad facultad = new Facultad("Ingenieria");
-        Carrera carrera = new Carrera("Ingenieria de Sistemas", facultad);
+
+        this.estudiante.setCodigo(txtCodigo.getText());
+        this.estudiante.setDni(txtDni.getText());
+        this.estudiante.setNombres(txtNombres.getText());
         
-        Estudiante nuevo = new Estudiante(txtCodigo.getText(), carrera, txtDni.getText(), 
-                txtApellidos.getText(), txtNombres.getText(), Genero.FEMENINO, null);
-        
-        this.estudiantes.add(nuevo);
         this.frmLista.loadTabla();
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
+
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     /**
@@ -175,20 +182,20 @@ public class EstudianteNewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(EstudianteNewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EstudianteEditJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(EstudianteNewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EstudianteEditJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(EstudianteNewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EstudianteEditJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(EstudianteNewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(EstudianteEditJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EstudianteNewJFrame().setVisible(true);
+                new EstudianteEditJFrame().setVisible(true);
             }
         });
     }

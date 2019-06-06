@@ -100,6 +100,11 @@ public class EstudianteJFrame extends javax.swing.JFrame {
         });
 
         btnEditar.setText("Editar");
+        btnEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("jButton3");
 
@@ -149,6 +154,21 @@ public class EstudianteJFrame extends javax.swing.JFrame {
         newFrame.setVisible(true);
                 
     }//GEN-LAST:event_btnNuevoActionPerformed
+
+    private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
+        
+        int row = tblEstudiante.getSelectedRow();
+        if (row != -1) {
+            int id = (int)tblEstudiante.getValueAt(row, 0);
+        
+            EstudianteEditJFrame editFrame = new EstudianteEditJFrame();
+            editFrame.setFrmLista(this);
+            editFrame.setEstudiantes(estudiantes);   
+            editFrame.setId(id);
+            editFrame.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_btnEditarActionPerformed
 
     /**
      * @param args the command line arguments

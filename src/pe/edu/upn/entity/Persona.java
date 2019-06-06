@@ -55,7 +55,7 @@ public abstract class Persona {
         return nombres;
     }
     // Proteje el metodo de las clases hijas
-    protected void setNombres(String nombres) {
+    public void setNombres(String nombres) {
         this.nombres = nombres;
     }
 
