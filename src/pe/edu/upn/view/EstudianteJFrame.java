@@ -35,7 +35,7 @@ public class EstudianteJFrame extends javax.swing.JFrame {
         this.estudiantes.add(estu3);
         this.estudiantes.add(estu4);
     }
-    private void loadTabla() {
+    public void loadTabla() {
         int tamano = this.estudiantes.size();
         DefaultTableModel modelo = new DefaultTableModel();
         modelo.setRowCount( tamano );
@@ -93,6 +93,11 @@ public class EstudianteJFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblEstudiante);
 
         btnNuevo.setText("Nuevo");
+        btnNuevo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnNuevoActionPerformed(evt);
+            }
+        });
 
         btnEditar.setText("Editar");
 
@@ -136,6 +141,14 @@ public class EstudianteJFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnNuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoActionPerformed
+        EstudianteNewJFrame newFrame = new EstudianteNewJFrame();
+        newFrame.setFrmLista(this);
+        newFrame.setEstudiantes(estudiantes);
+        newFrame.setVisible(true);
+                
+    }//GEN-LAST:event_btnNuevoActionPerformed
 
     /**
      * @param args the command line arguments
